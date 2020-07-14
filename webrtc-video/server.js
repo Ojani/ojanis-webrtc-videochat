@@ -14,7 +14,7 @@ app.get("/simplepeer.js", (req, res) => res.sendFile(__dirname + "/node_modules/
 
 
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const server = app.listen(PORT, function(err) {
   if (err) return console.log(err);
