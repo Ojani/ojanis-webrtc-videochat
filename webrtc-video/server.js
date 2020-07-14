@@ -122,7 +122,11 @@ io.on("connection", socket => {
   });
 
   socket.on("setHost", data => {
-    rooms[data.to].host = { id: data.id }
+    try {
+      rooms[data.to].host = { id: data.id }
+    catch {
+      socket.emit("redirect", "/");
+    }
   });
 
   socket.on("acceptCall", data => {

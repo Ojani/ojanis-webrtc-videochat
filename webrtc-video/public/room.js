@@ -10,6 +10,10 @@ if(window.location.hostname == "localhost") {
 
 socket.on("connect", () => {
 
+socket.on("redirect", url => {
+  window.location = url;
+});
+
 var streaming;
 var caller;
 var stream;
