@@ -114,23 +114,35 @@ function verifyUsername(req, res, next) {
 //WEBRTC Signaling
 io.on("connection", socket => {
   socket.on('callUser', data => {
-    io.to(data.to).emit("hey", { signal: data.signal, from: data.from });
+    try {
+      io.to(data.to).emit("hey", { signal: data.signal, from: data.from });
+    } catch {
+      socket.emit("redirect", "/");
+    }
   });
 
   socket.on("setInvite", data => {
-    io.to(data.to).emit("setInvite", data.id);
+    try {
+      io.to(data.to).emit("setInvite", data.id);
+    } catch {
+      socket.emit("redirect", "/");
+    }
   });
 
   socket.on("setHost", data => {
     try {
       rooms[data.to].host = { id: data.id }
-    catch {
+    } catch {
       socket.emit("redirect", "/");
     }
   });
 
   socket.on("acceptCall", data => {
-    io.to(data.to).emit("callAccepted", data.signal);
+    try {
+      io.to(data.to).emit("callAccepted", data.signal);
+    } catch {
+      socket.emit("redirect", "/");
+    }
   });
 
 });
