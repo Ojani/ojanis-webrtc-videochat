@@ -45,8 +45,8 @@ const externalStream = document.querySelector(".externalStream")
 const constraints = {
   audio: true,
   video: {
-    height: { ideal: window.innerHeight },
-    width: { ideal: window.innerHeight/2 }
+    height: { ideal: window.innerWidth/1.75 },
+    width: { ideal: window.innerWidth }
   }
 
 }
