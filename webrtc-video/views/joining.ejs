@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Ojani&apos;s time</title>
+
+    <link rel="stylesheet" href="joining.css">
+    <script defer src="socket.io/socket.io.js"></script>
+    <script defer src="joining.js"></script>
+
+  </head>
+  <body>
+
+    <form class="content-wrapper" action="/room/<%= id %>" method="POST">
+      <h1>Enter a username before joining</h1>
+
+      <div class="inputsWrapper">
+        <input type="text" name="username">
+        <input type="text" id="socketid" name="socketid" hidden>
+        <button type="submit">Join</button>
+      </div>
+    </form>
+
+    <%- include("loadingScreen.ejs") -%>
+
+  </body>
+
+</html>

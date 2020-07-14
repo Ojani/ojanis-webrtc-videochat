@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>WebRTC Videochat</title>
+
+    <script defer src="socket.io/socket.io.js"></script>
+    <script defer src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <%- include("loadingScreen.ejs") -%>
+
+  </head>
+  <body>
+
+    <h1 class="title">Ojani&apos;s Time ;)</h1>
+
+    <div class="contentWrapper">
+
+      <form method="POST" action="/" class="joinWrapper">
+        <h2 class="h2">Join Room</h2>
+        <div class="inputsWrapper">
+          <input type="text" name="roomId" placeholder="Room ID" required>
+          <button type="submit" class="joinBtn">Join User</button>
+        </div>
+      </form>
+
+      <form class="createForm" method="post">
+        <div class="createWrapper">
+          <h2 class="h2">Create Room</h2>
+          <div class="inputsWrapper">
+            <input type="text" class="nameInput" placeholder="Username" required>
+            <button type="submit" class="createBtn">Create</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="errMsgWrapper">
+        <% try { %>
+          <%= err %>
+        <% }catch {} %>
+      </div>
+
+    </div>
+
+  </body>
+</html>
