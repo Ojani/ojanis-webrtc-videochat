@@ -6,7 +6,6 @@
     <title>Ojani&apos;s time</title>
 
     <script>
-    console.log(<%- room -%>)
       const Room = <%- room -%>;
     </script>
 
@@ -20,8 +19,8 @@
 
     <h1>Joining Link: <%= joinUrl %> </h1>
 
-    <video class="localStream"></video>
-    <video class="externalStream"></video>
+    <video class="localStream" playsinline></video>
+    <video class="externalStream" playsinline></video>
 
   </body>
 </html>

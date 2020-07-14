@@ -7,7 +7,6 @@ if(window.location.hostname == "localhost") {
 }
 
 
-const host = Room.host.id == sessionStorage.getItem("id");
 
 socket.on("connect", () => {
 
@@ -17,7 +16,7 @@ var stream;
 const yourId = socket.id;
 var peerId;
 
-if(host) {
+if(Room.host.id == null) {
   socket.emit("setHost", { id: yourId , to: Room.id});
 
   socket.on("setInvite", id => {

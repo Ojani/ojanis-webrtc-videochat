@@ -81,8 +81,7 @@ io.on("connection", socket => {
     if(!username) return;
     if(username.replace(" ", "").length < 3) return;
 
-    rooms[socket.id] = { users: {}, host: { id: socket.id }, id: socket.id }
-    rooms[socket.id].users[socket.id] = { username: username, room: socket.id };
+    rooms[socket.id] = { users: {}, host: {}, invite: {}, id: socket.id }
 
     socket.emit("redirect", "/room/"+socket.id+"?userid="+socket.id);
 

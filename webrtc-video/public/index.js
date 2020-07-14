@@ -8,7 +8,6 @@ if(window.location.hostname == "localhost") {
 
 socket.on("connect", () => {
   document.querySelector(".loadingScreen").style.display = "none";
-  sessionStorage.setItem("id", socket.id);
 });
 
 socket.on("redirect", url => {

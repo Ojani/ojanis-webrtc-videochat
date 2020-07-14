@@ -13,7 +13,6 @@ socket.on("redirect", url => {
 
 //Sending socket id with post
 socket.on("connect", () => {
-  sessionStorage.setItem("id", socket.id)
   document.querySelector("input[name='socketid']").value = socket.id;
   document.body.removeChild(document.querySelector(".loadingScreen"));
 
