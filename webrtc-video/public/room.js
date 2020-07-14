@@ -74,6 +74,7 @@ function callPeer() {
   });
 
   peer.on("stream", stream => {
+    externalStream.style.display = "initial";
     externalStream.srcObject = stream;
     externalStream.onloadedmetadata = () => externalStream.play();
   });

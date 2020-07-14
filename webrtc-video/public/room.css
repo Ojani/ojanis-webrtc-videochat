@@ -12,7 +12,6 @@ body {
 video {
   transform: scaleX(-1);
   position: absolute;
-  pointer-events: none;
 
 }
 
@@ -26,6 +25,7 @@ video {
 }
 
 .externalStream {
+  display: none;
   height: 100vh;
   left: 0;
   top: 0;
