@@ -11,10 +11,23 @@ body {
 
 video {
   transform: scaleX(-1);
+  position: absolute;
+  pointer-events: none;
 
 }
 
 .localStream {
+  height: 30vh;
+  right: 0;
+  top: 100%;
+  transform: scaleX(-1) translateY(-100%);
+  z-index: 10;
+
+}
+
+.externalStream {
   height: 100vh;
+  left: 0;
+  top: 0;
 
 }
