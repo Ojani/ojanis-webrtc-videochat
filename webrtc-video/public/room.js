@@ -74,7 +74,6 @@ function callPeer() {
   });
 
   peer.on("stream", stream => {
-    console.log("streaming");
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
     externalStream.onloadedmetadata = () => externalStream.play();
@@ -98,8 +97,8 @@ function acceptCall(callerSignal, caller) {
   });
 
   peer.on('stream', stream => {
-    console.log("call accepted")
     streaming = true;
+    externalStream.style.display = "block";
     externalStream.srcObject = stream;
     externalStream.play();
   });
