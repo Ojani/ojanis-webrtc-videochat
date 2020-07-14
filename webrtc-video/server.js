@@ -49,23 +49,19 @@ app.get("/room", (req, res) => {
 
 app.post("/room/:roomId", verifyUsername, (req, res) => {
   const roomId = req.params.roomId;
-  const socketId = req.body.socketid;
 
-  if(!socketId) return res.render("room.ejs", { err: "An unexcpected error has occurred." });
   if(!rooms[roomId]) return res.render("room.ejs", { err: "Room does not exist, the host may have exited the room." });
 
-  rooms[roomId].users[socketId] = { username: req.body.username, room: roomId };
-  res.redirect("/room/"+roomId+"?userid="+socketId);
+  res.redirect("/room/"+roomId);
 
 });
 
 //Entering a room
 app.get("/room/:roomId", (req, res) => {
   const roomId = req.params.roomId;
-  const userId = req.query.userid;
 
   if(!rooms[roomId]) return res.redirect("/");
-  if(!rooms[roomId].users[userId]) return res.redirect("/room?id="+roomId);
+  if(rooms[roomId].invite.id != null) return res.redirect("/room?id="+roomId);
 
   res.render("room.ejs", { joinUrl: `${req.protocol}://${req.get("host")}/room?id=${roomId}`, room: JSON.stringify(rooms[roomId]) });
 });
@@ -83,7 +79,7 @@ io.on("connection", socket => {
 
     rooms[socket.id] = { users: {}, host: {}, invite: {}, id: socket.id }
 
-    socket.emit("redirect", "/room/"+socket.id+"?userid="+socket.id);
+    socket.emit("redirect", "/room/"+socket.id);
 
   });
 
