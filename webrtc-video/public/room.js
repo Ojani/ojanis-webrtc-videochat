@@ -127,7 +127,10 @@ function submitText(e=undefined) {
   }
 
   const text = document.querySelector(".textInput").value;
+  if(text.replace(/ /g,"") == "") return;
+
   document.querySelector(".textInput").value = "";
+
   const messageObj = { local:true, msg: text }
 
   appendMessage(messageObj);
@@ -140,6 +143,8 @@ socket.on("message", msg => {
 });
 
 function appendMessage(msg) {
+  if(msg.msg.replace(/ /g,"") == "") return;
+
   var p = document.createElement("p");
   p.className = "message";
   var name = document.createElement("span");
@@ -159,6 +164,14 @@ function appendMessage(msg) {
   p.append(txt);
 
   document.querySelector(".messagesWrapper").append(p);
+
+  //scrolling to bottom
+  var chatWrapper = document.querySelector(".chatWrapper");
+
+  if(chatWrapper.scrollTop > chatWrapper.scrollHeight - chatWrapper.clientHeight/2 ) {
+    chatWrapper.scrollTop = chatWrapper.scrollHeight;
+  }
+
 
 }
 
