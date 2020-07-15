@@ -4,6 +4,7 @@
 }
 
 body {
+  background: #f5f5dc;
   font-family: arial;
   margin: 0px;
 
@@ -12,6 +13,7 @@ body {
 video {
   transform: scaleX(-1);
   position: absolute;
+  border: 3px solid black;
 
 }
 
@@ -29,5 +31,71 @@ video {
   height: 70vh;
   left: 0;
   top: 0;
+
+}
+
+.chatWrapper {
+  width: 75vw;
+  height: 30vh;
+  background: white;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  overflow: scroll;
+  word-wrap: break-word;
+  padding-bottom: 1.5em;
+
+}
+
+.textForm {
+  font-size: 1.2em;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+
+}
+
+.textInput {
+  display: inline-block;
+  font-size: 1em;
+  width: 75%;
+  border: 2px solid black;
+  border-radius: 0;
+
+}
+
+.sendMsgBtn {
+  width: 25%;
+  background: #1588ff;
+  color: white;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+  cursor: pointer;
+  height: 1.4em;
+  position: absolute;
+  right: 0;
+  transition: background-color .3s;
+
+}
+
+.sendMsgBtn:hover {
+  background: #0477EE;
+
+}
+
+.message {
+  margin-left: 1em;
+
+}
+
+.name {
+  font-weight: bolder;
+  color: #1588FF;
+}
+
+.name.local {
+  color: #34eb52;
 
 }

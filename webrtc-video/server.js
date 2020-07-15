@@ -52,6 +52,7 @@ app.post("/room/:roomId", verifyUsername, (req, res) => {
 
   if(!rooms[roomId]) return res.render("room.ejs", { err: "Room does not exist, the host may have exited the room." });
 
+  rooms[roomId].invite.name = req.body.username;
   res.redirect("/room/"+roomId);
 
 });
@@ -77,7 +78,7 @@ io.on("connection", socket => {
     if(!username) return;
     if(username.replace(" ", "").length < 3) return;
 
-    rooms[socket.id] = { users: {}, host: {}, invite: {}, id: socket.id }
+    rooms[socket.id] = { users: {}, host: { name: username }, invite: {}, id: socket.id }
 
     socket.emit("redirect", "/room/"+socket.id);
 
@@ -113,6 +114,7 @@ function verifyUsername(req, res, next) {
 
 //WEBRTC Signaling
 io.on("connection", socket => {
+
   socket.on('callUser', data => {
     try {
       io.to(data.to).emit("hey", { signal: data.signal, from: data.from });
@@ -123,7 +125,8 @@ io.on("connection", socket => {
 
   socket.on("setInvite", data => {
     try {
-      io.to(data.to).emit("setInvite", data.id);
+      rooms[data.room].invite.id = data.id;
+      io.to(rooms[data.room].host.id).emit("setInvite", data.id);
     } catch {
       socket.emit("redirect", "/");
     }
@@ -131,7 +134,7 @@ io.on("connection", socket => {
 
   socket.on("setHost", data => {
     try {
-      rooms[data.to].host = { id: data.id }
+      rooms[data.room].host.id = data.id;
     } catch {
       socket.emit("redirect", "/");
     }
@@ -142,6 +145,17 @@ io.on("connection", socket => {
       io.to(data.to).emit("callAccepted", data.signal);
     } catch {
       socket.emit("redirect", "/");
+    }
+  });
+
+  socket.on("message", (txt, roomId, to) => {
+    try {
+      var room = rooms[roomId];
+      var name = room.host.id = socket.id? room.host.name : room.invite.name;
+      var msgObj = { msg: txt, name: name }
+      io.to(to).emit("message", msgObj);
+    } catch {
+
     }
   });
 

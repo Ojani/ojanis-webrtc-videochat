@@ -21,7 +21,7 @@ const yourId = socket.id;
 var peerId;
 
 if(Room.host.id == null) {
-  socket.emit("setHost", { id: yourId , to: Room.id});
+  socket.emit("setHost", { id: yourId , room: Room.id});
 
   socket.on("setInvite", id => {
     peerId = id;
@@ -30,7 +30,8 @@ if(Room.host.id == null) {
 
 }
 else {
-  socket.emit("setInvite", { id: yourId, to: Room.host.id });
+  socket.emit("setInvite", { id: yourId, room: Room.id });
+  peerId = Room.host.id;
 }
 
 
@@ -116,5 +117,49 @@ socket.on("hey", data => {
 });
 
 
+document.querySelector(".textForm").onsubmit = e => submitText(e);
+document.querySelector(".sendMsgBtn").onclick = () => submitText();
+
+//Messaging
+function submitText(e=undefined) {
+  if(e) {
+    e.preventDefault();
+  }
+
+  const text = document.querySelector(".textInput").value;
+  document.querySelector(".textInput").value = "";
+  const messageObj = { local:true, msg: text }
+
+  appendMessage(messageObj);
+  socket.emit("message", text, Room.id, peerId);
+
+}
+
+socket.on("message", msg => {
+  appendMessage(msg);
+});
+
+function appendMessage(msg) {
+  var p = document.createElement("p");
+  p.className = "message";
+  var name = document.createElement("span");
+  var txt = document.createElement("span");
+
+  txt.innerText = msg.msg;
+
+  if(msg.local) {
+    name.innerText = "You";
+    name.className = "name local";
+  } else {
+    name.innerText = msg.name;
+    name.className = "name external";
+  }
+  p.append(name);
+  p.append(": ");
+  p.append(txt);
+
+  document.querySelector(".messagesWrapper").append(p);
+
+}
 
 });
