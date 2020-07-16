@@ -88,10 +88,12 @@ function callPeer() {
   });
 
   peer.on("signal", data => {
+    if(streaming) return;
     socket.emit("callUser", {signal: data, to: peerId, from: yourId});
   });
 
   peer.on("stream", stream => {
+    streaming = true;
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
     externalStream.onloadedmetadata = () => externalStream.play();
@@ -118,7 +120,6 @@ function acceptCall(callerSignal, caller) {
   });
 
   peer.on('stream', stream => {
-    streaming = true;
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
     externalStream.play();
@@ -127,11 +128,12 @@ function acceptCall(callerSignal, caller) {
 
   });
 
-  if(!streaming) peer.signal(callerSignal);
+  peer.signal(callerSignal);
 
 }
 
 socket.on("hey", data => {
+  console.log("hey")
   acceptCall(data.signal, data.from);
 
 });
