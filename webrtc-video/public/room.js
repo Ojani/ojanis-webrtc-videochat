@@ -83,7 +83,7 @@ navigator.mediaDevices.getUserMedia(constraints)
 function callPeer() {
   const peer = new SimplePeer({
     initiator: true,
-    terickle: false,
+    trickle: false,
     stream: stream
   });
 
