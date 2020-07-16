@@ -196,3 +196,8 @@ function appendMessage(msg) {
 }
 
 });
+
+socket.on("host-disconnected", () => {
+  alert("The host has disconnected from the room.");
+  location.reload();
+});
