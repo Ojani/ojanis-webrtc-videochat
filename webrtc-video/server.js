@@ -118,26 +118,37 @@ io.on("connection", socket => {
   socket.on('callUser', data => {
     try {
       io.to(data.to).emit("hey", { signal: data.signal, from: data.from });
-    } catch {
+    } catch (err) {
+      console.log(err);
       socket.emit("redirect", "/");
     }
   });
 
   socket.on("setInvite", data => {
     try {
+      if(!rooms[data.room]) return;
+
       rooms[data.room].invite.id = data.id;
       io.to(rooms[data.room].host.id).emit("setInvite", data.id);
-    } catch {
+      socket.participantOf = data.room;
+
+    } catch (err) {
+      console.log(err);
       socket.emit("redirect", "/");
     }
   });
 
   socket.on("setHost", data => {
     try {
-      rooms[data.room].host.id = data.id;
-    } catch {
+      if(!rooms[data.room]) return;
+
+      rooms[data.room].host.id = socket.id;
+      socket.participantOf = data.room;
+    } catch (err) {
+      console.log(err);
       socket.emit("redirect", "/");
     }
+    console.log(rooms);
   });
 
   socket.on("acceptCall", data => {
@@ -154,9 +165,21 @@ io.on("connection", socket => {
       var name = room.host.id = socket.id? room.host.name : room.invite.name;
       var msgObj = { msg: txt, name: name }
       io.to(to).emit("message", msgObj);
-    } catch {
-
+    } catch (err) {
+      console.log(err);
     }
+  });
+
+  socket.on("disconnect", () => {
+    try {
+      if(rooms[socket.participantOf] && rooms[socket.participantOf].host.id == socket.id) {
+        delete rooms[socket.participantOf];
+        console.log(rooms);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+
   });
 
 });
