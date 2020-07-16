@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
 * {
   box-sizing: border-box;
 
@@ -5,12 +7,15 @@
 
 body {
   font-family: arial;
-  background: lightblue;
+  background: #b5efff;
 
 }
 
 .title {
   text-align: center;
+  font-family: "Courgette", "comic sans ms", arial;
+  font-size: 3em;
+  margin-top: 0;
 
 }
 

@@ -7,6 +7,20 @@ if(window.location.hostname == "localhost") {
 }
 
 
+//copy link button
+const linkWrapper = document.querySelector(".linkWrapper");
+document.querySelector(".copyLinkBtn").onclick = () => {
+  var e = document.createElement("input");
+  document.body.append(e);
+  e.value = document.querySelector(".joiningLink").innerText;
+  e.select();
+  e.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(e);
+
+}
+
+
 
 socket.on("connect", () => {
 
@@ -21,7 +35,7 @@ const yourId = socket.id;
 var peerId;
 
 if(Room.host.id == null) {
-  socket.emit("setHost", { id: yourId , room: Room.id});
+  socket.emit("setHost", { id: yourId , room: Room.id });
 
   socket.on("setInvite", id => {
     peerId = id;
@@ -81,6 +95,9 @@ function callPeer() {
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
     externalStream.onloadedmetadata = () => externalStream.play();
+    document.querySelector(".messagesWrapper").append("You can now chat...");
+    linkWrapper.parentNode.removeChild(linkWrapper);
+
   });
 
   socket.on("callAccepted", signal => {
@@ -105,6 +122,9 @@ function acceptCall(callerSignal, caller) {
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
     externalStream.play();
+    document.querySelector(".messagesWrapper").append("You can now chat...");
+    linkWrapper.parentNode.removeChild(linkWrapper);
+
   });
 
   if(!streaming) peer.signal(callerSignal);
@@ -168,7 +188,7 @@ function appendMessage(msg) {
   //scrolling to bottom
   var chatWrapper = document.querySelector(".chatWrapper");
 
-  if(chatWrapper.scrollTop > chatWrapper.scrollHeight - chatWrapper.clientHeight/2 ) {
+  if(chatWrapper.scrollTop > chatWrapper.scrollHeight - window.innerHeight/2 || msg.local) {
     chatWrapper.scrollTop = chatWrapper.scrollHeight;
   }
 

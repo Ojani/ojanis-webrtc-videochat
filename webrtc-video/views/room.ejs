@@ -17,10 +17,14 @@
   </head>
   <body>
 
-    <h1>Joining Link: <%= joinUrl %> </h1>
+    <div class="linkWrapper">
+      <span class="joinLinkTxt">Joining Link</span>
+      <span class="joiningLink"> <%= joinUrl %> </span>
+      <span class="copyLinkBtn">Copy</span>
+    </div>
 
-    <video class="localStream" muted playsinline></video>
-    <video class="externalStream" playsinline></video>
+    <video class="localStream" controls muted playsinline></video>
+    <video class="externalStream" controls playsinline></video>
 
     <div class="chatWrapper">
 

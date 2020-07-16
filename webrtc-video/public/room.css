@@ -3,6 +3,62 @@
 
 }
 
+.linkWrapper {
+  position: absolute;
+  left: 50%;
+  top: 2em;
+  transform: translateX(-50%);
+  border: .2rem solid black;
+  width: 35em;
+  height: 2.5em;
+  font-size: 1.5em;
+  display: flex;
+  flex-wrap: nowrap;
+
+}
+
+.linkWrapper span {
+  padding: .75rem 0;
+  display: inline-block;
+  flex-shrink: 0;
+
+}
+
+.joinLinkTxt {
+  flex-grow: 1;
+  font-weight: bold;
+  background: white;
+  text-align: center;
+  border-right: .1rem solid black;
+
+}
+
+.joiningLink {
+  overflow: scroll;
+  white-space: nowrap;
+  flex: 0 0 25em;
+  background: #333;
+  color: white;
+
+}
+
+.copyLinkBtn {
+  border-left: .1rem solid black;
+  flex-grow: 1;
+  background: #1588FF;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color .3s;
+
+}
+
+.copyLinkBtn:hover {
+  background: #0477EE;
+
+}
+
+
 body {
   background: #f5f5dc;
   font-family: arial;

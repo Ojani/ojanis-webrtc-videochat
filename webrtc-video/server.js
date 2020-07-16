@@ -63,8 +63,8 @@ app.get("/room/:roomId", (req, res) => {
 
   if(!rooms[roomId]) return res.redirect("/");
   if(rooms[roomId].invite.id != null) return res.redirect("/room?id="+roomId);
-
-  res.render("room.ejs", { joinUrl: `${req.protocol}://${req.get("host")}/room?id=${roomId}`, room: JSON.stringify(rooms[roomId]) });
+  var protocol = req.get("host") == "0.0.0.0"+PORT || req.get("host") == "localhost"+PORT? "http" : "https";
+  res.render("room.ejs", { joinUrl: `${protocol}://${req.get("host")}/room?id=${roomId}`, room: JSON.stringify(rooms[roomId]) });
 });
 
 
