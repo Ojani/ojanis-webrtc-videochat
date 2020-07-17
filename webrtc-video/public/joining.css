@@ -9,6 +9,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #b5efff;
+
+  background-image: url('/icons/apple-icon.png');
+  background-repeat: no-repeat;
+  background-size: 3.7rem, 3.7rem;
+  background-position: .4rem .4rem;
 
 }
 
