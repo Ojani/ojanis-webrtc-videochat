@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <%- include("webconfig.ejs") -%>
+  </head>
+  <body>
+
+    <div class="container">
+
+      <h1> 404 </h1>
+
+      <div class="desc">Whoops! How&apos;d you end up here?</div>
+
+      <div class="desc2">This route does not exist. click <a href="/">here</a> to go to the home page.</div>
+
+    </div>
+
+    <style>
+
+      body {
+        font-family: arial;
+        margin: 0;
+        background: #fffdd9;
+        background-image: url('/icons/favicon-96x96.png');
+        background-size: 15%, 15%;
+
+      }
+
+      .container {
+        background: #c2f6ff;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: .3em solid #333;
+
+      }
+
+      h1, .desc, .desc2 {
+        margin: .5em;
+        font-size: 2em;
+
+      }
+
+      h1 {
+        font-size: 7em;
+
+      }
+
+    </style>
+
+  </body>
+</html>

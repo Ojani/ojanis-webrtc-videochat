@@ -184,3 +184,10 @@ io.on("connection", socket => {
   });
 
 });
+
+
+//404 route
+app.all("*", (req, res) => {
+  res.status(404).render("404.ejs");
+
+});
