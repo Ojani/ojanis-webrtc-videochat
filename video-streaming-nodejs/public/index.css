@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+
+}
+
+body {
+  font-family: arial;
+  margin: 0;
+
+}
+
+video {
+
+}
+
+button {
+  font-size: 2em;
+}
+
+.stopBtn {
+  display: none;
+}
