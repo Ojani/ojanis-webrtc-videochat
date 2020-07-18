@@ -159,14 +159,6 @@ io.on("connection", socket => {
     }
   });
 
-  socket.on("gotStream", to => {
-    try {
-      io.to(to).emit("peerGotStream");
-    } catch(err) {
-      console.log(err);
-    }
-  });
-
   socket.on("message", (txt, roomId, to) => {
     try {
       var room = rooms[roomId];

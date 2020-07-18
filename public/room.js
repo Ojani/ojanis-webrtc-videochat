@@ -29,7 +29,6 @@ socket.on("redirect", url => {
 });
 
 var streaming;
-var peerStreaming;
 var caller;
 var stream;
 const yourId = socket.id;
@@ -48,12 +47,6 @@ else {
   socket.emit("setInvite", { id: yourId, room: Room.id });
   peerId = Room.host.id;
 }
-
-
-socket.on("peerGotStream", () => {
-  peerStreaming = true;
-
-});
 
 
 
@@ -93,12 +86,11 @@ function callPeer() {
   });
 
   peer.on("signal", data => {
-    if(streaming && peerStreaming) return;
+    if(streaming) return;
     socket.emit("callUser", {signal: data, to: peerId, from: yourId});
   });
 
   peer.on("stream", stream => {
-    socket.emit("gotStream", peerId);
     streaming = true;
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
@@ -126,7 +118,6 @@ function acceptCall(callerSignal, caller) {
   });
 
   peer.on('stream', stream => {
-    socket.emit("gotStream", peerId);
     streaming = true;
     externalStream.style.display = "block";
     externalStream.srcObject = stream;
