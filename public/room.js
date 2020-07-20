@@ -152,7 +152,10 @@ socket.on("hey", data => {
 
 
 document.querySelector(".textForm").onsubmit = e => submitText(e);
-document.querySelector(".sendMsgBtn").onclick = () => submitText();
+document.querySelector(".sendMsgBtn").onclick = () => {
+  submitText();
+  document.querySelector(".textInput").focus();
+}
 
 //Messaging
 function submitText(e=undefined) {
