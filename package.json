@@ -1,10 +1,10 @@
 {
   "name": "webrtc-video",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -17,5 +17,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ojani/ojanis-webrtc-videochat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ojani/ojanis-webrtc-videochat/issues"
+  },
+  "homepage": "https://github.com/Ojani/ojanis-webrtc-videochat#readme",
+  "description": ""
 }

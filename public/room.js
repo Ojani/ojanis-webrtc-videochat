@@ -21,6 +21,19 @@ document.querySelector(".copyLinkBtn").onclick = () => {
 }
 
 
+//showing messages when focused on text box (screen size less that 710px)
+document.querySelector(".textInput").onfocus = () => {
+  document.querySelector(".prevAndChatBox").classList.add("focused");
+  document.querySelector(".localStream").classList.add("focused");
+
+}
+document.querySelector(".textInput").onblur = () => {
+  document.querySelector(".prevAndChatBox").classList.remove("focused");
+  document.querySelector(".localStream").classList.remove("focused");
+
+}
+
+
 
 socket.on("connect", () => {
 

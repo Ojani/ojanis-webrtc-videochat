@@ -68,21 +68,17 @@ body {
 
 video {
   transform: scaleX(-1);
-  position: absolute;
-  border: 3px solid black;
 
 }
 
 .localStream {
-  height: 28vh;
-  left: 0;
-  top: 100%;
-  transform: scaleX(-1) translateY(-100%);
-  z-index: 10;
+  height: 100%;
+  transform: scaleX(-1);
 
 }
 
 .externalStream {
+  position: absolute;
   display: none;
   height: 70vh;
   left: 0;
@@ -90,16 +86,29 @@ video {
 
 }
 
-.chatWrapper {
-  width: 75vw;
-  height: 30vh;
+.prevAndChatBox {
   background: white;
   position: absolute;
-  right: 0;
+  display: flex;
+  height: 28vh;
   bottom: 0;
+  width: 100vw;
+  align-items: stretch;
+
+}
+
+.chatWrapper {
+  height: 100%;
+  width: 100%;
+
+}
+
+.messagesWrapper {
+  padding-bottom: 1.5em;
+  height: 100%;
   overflow: scroll;
   word-wrap: break-word;
-  padding-bottom: 1.5em;
+  width: 100%;
 
 }
 
@@ -153,5 +162,102 @@ video {
 
 .name.local {
   color: #34eb52;
+
+}
+
+@media only screen and (max-width: 1052px) {
+  .linkWrapper {
+    font-size: 1rem;
+  }
+
+}
+
+@media only screen and (max-width: 710px) {
+  .linkWrapper {
+    width: 30em;
+  }
+
+  .joiningLink {
+    flex: 0 0 20em;
+  }
+
+  .prevAndChatBox {
+    flex-direction: column;
+    height: 24vh;
+    width: initial;
+    transition: .3s;
+  }
+
+  .localStream {
+    height: 100%;
+    transition: .3s;
+  }
+
+  .chatWrapper {
+    width: 100%;
+  }
+
+  .prevAndChatBox.focused {
+    height: 48vh;
+    width: 100vw;
+  }
+
+  .localStream.focused {
+    height: 50%;
+  }
+
+}
+
+@media only screen and (max-width: 610px) {
+  .linkWrapper {
+    width: 25em;
+  }
+
+  .joiningLink {
+    flex: 0 0 15em;
+  }
+
+  .externalStream {
+    height: initial;
+    width: 100vw;
+  }
+
+}
+
+@media only screen and (max-width: 505px) {
+  .linkWrapper {
+    width: 20em;
+  }
+
+  .joiningLink {
+    flex: 0 0 10em;
+  }
+
+}
+
+@media only screen and (max-width: 415px) {
+  .linkWrapper {
+    width: 15em;
+  }
+
+  .joiningLink {
+    flex: 0 0 5em;
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+  .linkWrapper {
+    width: 12em;
+  }
+
+  .joiningLink {
+    flex: 0 0 2em;
+  }
+
+  .localStream {
+    height: initial;
+    width: 250px;
+  }
 
 }
